@@ -2,7 +2,13 @@ name := course.value + "-" + assignment.value
 
 scalaVersion := "2.11.7"
 
-scalacOptions ++= Seq("-deprecation")
+scalacOptions ++= Seq(
+  "-feature",
+  "-unchecked",
+  "-deprecation",
+  "-Xlint",
+  "-Xfatal-warnings"
+)
 
 // grading libraries
 libraryDependencies += "junit" % "junit" % "4.10" % "test"
