@@ -47,7 +47,7 @@ import org.scalatest.junit.JUnitRunner
    * This allows tests to be written in a more readable manner:
    */
   test("one plus one is three?") {
-    assert(1 + 1 == 3) // This assertion fails! Go ahead and fix it.
+    assert(1 + 2 == 3)
   }
 
 
@@ -72,7 +72,7 @@ import org.scalatest.junit.JUnitRunner
    * We recommend to always use the `===` equality operator when writing tests.
    */
   test("details why one plus one is not three") {
-    assert(1 + 1 === 3) // Fix me, please!
+    assert(1 + 2 === 3)
   }
 
   /**
@@ -113,14 +113,45 @@ import org.scalatest.junit.JUnitRunner
    * however it is recommended to write an individual `test` statement for
    * every tested aspect of a method.
    */
-  test("sum of a few numbers") {
-    assert(sum(List(1,2,0)) === 3)
+
+  test("sum of an empty list expect to return 0") {
+    val expectation = 0
+    val actual = sum(List())
+
+    assert(actual === expectation)
   }
 
-  test("max of a few numbers") {
-    assert(max(List(3, 7, 2)) === 7)
+  test("sum of a list of 1 element expect to return this element") {
+    val expectation = 1
+    val actual = sum(List(1))
+
+    assert(actual === expectation)
   }
 
+  test("sum of a list of N element expect to return sum of all element") {
+    val expectation = 3
+    val actual = sum(List(1, 2, 0))
 
+    assert(actual === expectation)
+  }
 
+  test("max of an empty list expect to throw en exception") {
+    intercept[java.util.NoSuchElementException] {
+      max(List())
+    }
+  }
+
+  test("max of a list of 1 element expect to return this element") {
+    val expectation = 1
+    val actual = max(List(1))
+
+    assert(actual === expectation)
+  }
+
+  test("max of a list of N element expect to return the greater") {
+    val expectation = 5
+    val actual = max(List(1, 5, 2))
+
+    assert(actual === expectation)
+  }
 }
