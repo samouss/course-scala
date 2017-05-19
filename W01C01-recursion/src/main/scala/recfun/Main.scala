@@ -16,8 +16,11 @@ object Main {
   def pascal(c: Int, r: Int): Int = {
     def factorial(x: Int): Int = {
       def loop (acc: Int, n: Int): Int = {
-        if (n == 0) acc
-        else loop(acc * n, n - 1)
+        if (n == 0) {
+          return acc
+        }
+
+        loop(acc * n, n - 1)
       }
 
       loop(1, x)
@@ -36,8 +39,11 @@ object Main {
       if (char == '(') count + 1 else count - 1
 
     def loop(chars: List[Char], count: Int = 0): Boolean = {
-      if (isNegative(count)) false
-      else chars match {
+      if (isNegative(count)) {
+        return false
+      }
+
+      chars match {
         case Nil => count == 0
         case x :: Nil => increment(x, count) == 0
         case x :: xs => loop(xs, increment(x, count))
