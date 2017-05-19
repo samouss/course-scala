@@ -23,7 +23,8 @@ object Main {
       loop(1, x)
     }
 
-    factorial(r) / (factorial(c) * factorial(r - c))
+    if (c == 0) 1
+    else factorial(r) / (factorial(c) * factorial(r - c))
   }
 
   /**
