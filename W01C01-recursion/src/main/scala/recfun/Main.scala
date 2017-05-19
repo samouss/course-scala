@@ -29,7 +29,27 @@ object Main {
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = ???
+  def balance(chars: List[Char]): Boolean = {
+    def isNegative(x: Int): Boolean = x < 0
+
+    def increment(char: Char, count: Int): Int =
+      if (char == '(') count + 1 else count - 1
+
+    def loop(chars: List[Char], count: Int = 0): Boolean = {
+      if (isNegative(count)) false
+      else chars match {
+        case Nil => count == 0
+        case x :: Nil => increment(x, count) == 0
+        case x :: xs => loop(xs, increment(x, count))
+      }
+    }
+
+    chars match {
+      case Nil => false
+      case x :: Nil => false
+      case _ => loop(chars.filter(x => x == '(' || x == ')'))
+    }
+  }
   
   /**
    * Exercise 3
