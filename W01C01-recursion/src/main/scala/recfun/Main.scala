@@ -10,22 +10,22 @@ object Main {
     }
   }
 
+  def factorial(x: Int): Int = {
+    def loop (acc: Int, n: Int): Int = {
+      if (n == 0) acc else loop(acc * n, n - 1)
+    }
+
+    loop(1, x)
+  }
+
   /**
    * Exercise 1
    */
   def pascal(c: Int, r: Int): Int = {
-    def factorial(x: Int): Int = {
-      def loop (acc: Int, n: Int): Int = {
-        if (n == 0) acc
-        else loop(acc * n, n - 1)
-      }
-
-      loop(1, x)
-    }
-
     if (c == 0) 1
     else factorial(r) / (factorial(c) * factorial(r - c))
   }
+
 
   /**
    * Exercise 2
@@ -33,8 +33,9 @@ object Main {
   def balance(chars: List[Char]): Boolean = {
     def isNegative(x: Int): Boolean = x < 0
 
-    def increment(char: Char, count: Int): Int =
+    def increment(char: Char, count: Int): Int = {
       if (char == '(') count + 1 else count - 1
+    }
 
     def loop(chars: List[Char], count: Int = 0): Boolean = {
       if (isNegative(count)) false
@@ -54,10 +55,11 @@ object Main {
   /**
    * Exercise 3
    */
-  def countChange(money: Int, coins: List[Int]): Int =
+  def countChange(money: Int, coins: List[Int]): Int = {
     coins match {
       case _ if money == 0 => 1
       case x :: xs if money > 0 => countChange(money - x, x :: xs) + countChange(money, xs)
       case _ => 0
     }
+  }
 }
