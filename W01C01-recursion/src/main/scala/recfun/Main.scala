@@ -51,8 +51,7 @@ object Main {
     }
 
     chars match {
-      case Nil => false
-      case x :: Nil => false
+      case _ if chars.length <= 1 => false
       case _ => loop(chars.filter(x => x == '(' || x == ')'))
     }
   }
