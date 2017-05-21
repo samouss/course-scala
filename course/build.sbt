@@ -1,4 +1,4 @@
-name := "W01C01-5-square-root"
+name := "course"
 
 version := "1.0"
 
