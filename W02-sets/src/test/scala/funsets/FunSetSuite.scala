@@ -128,5 +128,39 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("forall check if all element in the set are positive") {
+    new TestSets {
+      val s = union(union(s1, s2), s3)
+      val predicate = (x: Int) => x > 0
+
+      assert(forall(s, predicate))
+    }
+  }
+
+  test("forall check if all element in the set are negative") {
+    new TestSets {
+      val s = union(union(s1, s2), s3)
+      val predicate = (x: Int) => x < 0
+
+      assert(!forall(s, predicate))
+    }
+  }
+
+  test("exists should return true when at least on element match the predicate") {
+    new TestSets {
+      val s = union(union(s1, s2), s3)
+      assert(exists(s, x => x > 1), "exists")
+    }
+  }
+
+  test("map should execute the map function on each element") {
+    new TestSets {
+      val s = map(union(s1, s2), x => x * 10)
+      assert(!contains(s, 1), "map 1")
+      assert(!contains(s, 2), "map 2")
+      assert(contains(s, 10), "map 10")
+      assert(contains(s, 20), "map 20")
+    }
+  }
 
 }
