@@ -37,9 +37,6 @@ abstract class TweetSet {
   /**
    * This method takes a predicate and returns a subset of all the elements
    * in the original set for which the predicate is true.
-   *
-   * Question: Can we implment this method here, or should it remain abstract
-   * and be implemented in the subclasses?
    */
   def filter(p: Tweet => Boolean): TweetSet = {
     this.filterAcc(p, new Empty)
@@ -52,11 +49,10 @@ abstract class TweetSet {
 
   /**
    * Returns a new `TweetSet` that is the union of `TweetSet`s `this` and `that`.
-   *
-   * Question: Should we implment this method here, or should it remain abstract
-   * and be implemented in the subclasses?
    */
-  def union(that: TweetSet): TweetSet = ???
+  def union(that: TweetSet): TweetSet = {
+    that.filterAcc(_ => true, this)
+  }
   
   /**
    * Returns the tweet from this set which has the greatest retweet count.
