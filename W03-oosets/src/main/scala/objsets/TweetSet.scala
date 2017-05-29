@@ -69,8 +69,6 @@ abstract class TweetSet {
    */
   def descendingByRetweet: TweetList
 
-  def isEmpty: Boolean
-
   /**
    * The following methods are already implemented
    */
@@ -101,8 +99,6 @@ abstract class TweetSet {
 
 class Empty extends TweetSet {
 
-  val isEmpty = true
-
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc
 
   def mostRetweeted: Tweet = {
@@ -125,8 +121,6 @@ class Empty extends TweetSet {
 }
 
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
-
-  val isEmpty = false
 
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = {
     if (p(elem)) left.filterAcc(p, right.filterAcc(p, acc.incl(elem)))
