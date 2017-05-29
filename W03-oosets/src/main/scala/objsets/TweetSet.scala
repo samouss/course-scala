@@ -133,9 +133,9 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
       else last
     }
 
-    if (left.isEmpty && right.isEmpty) elem
-    else if (left.isEmpty) max(right.mostRetweeted, elem)
-    else if (right.isEmpty) max(left.mostRetweeted, elem)
+    if (!left.contains(elem) && !right.contains(elem)) elem
+    else if (!left.contains(elem)) max(right.mostRetweeted, elem)
+    else if (!right.contains(elem)) max(left.mostRetweeted, elem)
     else max(elem, max(left.mostRetweeted, right.mostRetweeted))
   }
 
