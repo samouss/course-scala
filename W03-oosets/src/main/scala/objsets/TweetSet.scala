@@ -34,6 +34,8 @@ class Tweet(val user: String, val text: String, val retweets: Int) {
  */
 abstract class TweetSet {
 
+  def isEmpty: Boolean
+
   /**
    * This method takes a predicate and returns a subset of all the elements
    * in the original set for which the predicate is true.
@@ -99,6 +101,8 @@ abstract class TweetSet {
 
 class Empty extends TweetSet {
 
+  val isEmpty = true
+
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc
 
   def mostRetweeted: Tweet = {
@@ -122,6 +126,8 @@ class Empty extends TweetSet {
 
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
 
+  val isEmpty = false
+
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = {
     if (p(elem)) left.filterAcc(p, right.filterAcc(p, acc.incl(elem)))
     else left.filterAcc(p, right.filterAcc(p, acc))
@@ -133,9 +139,9 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
       else last
     }
 
-    if (!left.contains(elem) && !right.contains(elem)) elem
-    else if (!left.contains(elem)) max(right.mostRetweeted, elem)
-    else if (!right.contains(elem)) max(left.mostRetweeted, elem)
+    if (left.isEmpty && right.isEmpty) elem
+    else if (left.isEmpty) max(right.mostRetweeted, elem)
+    else if (right.isEmpty) max(left.mostRetweeted, elem)
     else max(elem, max(left.mostRetweeted, right.mostRetweeted))
   }
 
