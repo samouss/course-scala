@@ -89,7 +89,7 @@ object Huffman {
    */
   def makeOrderedLeafList(frequencies: List[(Char, Int)]): List[Leaf] = {
     frequencies
-      .map{ case (char, count) => Leaf(char, count) }
+      .map({ case (char, count) => Leaf(char, count) })
       .sortBy(_.weight)
   }
   
