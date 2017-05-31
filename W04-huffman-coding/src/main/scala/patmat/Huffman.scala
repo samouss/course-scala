@@ -90,7 +90,7 @@ object Huffman {
   def makeOrderedLeafList(frequencies: List[(Char, Int)]): List[Leaf] = {
     frequencies
       .map({ case (char, count) => Leaf(char, count) })
-      .sortBy(_.weight)
+      .sortBy(weight)
   }
   
   /**
@@ -111,7 +111,7 @@ object Huffman {
    * unchanged.
    */
   def combine(trees: List[CodeTree]): List[CodeTree] = trees match {
-    case x :: y :: xs => makeCodeTree(x, y) :: xs
+    case x :: y :: xs => (makeCodeTree(x, y) :: xs).sortBy(weight)
     case _ => trees
   }
   
