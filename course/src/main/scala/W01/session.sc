@@ -1,7 +1,11 @@
 def sqrt(x: Double): Double = {
-  def sqrtIter(guess: Double): Double =
-    if (isGoodEnough(guess)) guess
-    else sqrtIter(improve(guess))
+  def sqrtIter(guess: Double): Double = {
+    if (isGoodEnough(guess)) {
+      guess
+    } else {
+      sqrtIter(improve(guess))
+    }
+  }
 
   def isGoodEnough(guess: Double): Boolean =
     math.abs((guess * guess) - x) / x < 0.001
