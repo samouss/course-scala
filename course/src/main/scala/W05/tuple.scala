@@ -9,3 +9,15 @@ def merge(xs: List[Int], ys: List[Int]): List[Int] = (xs, ys) match {
       y :: merge(xs, ys1)
     }
 }
+
+def mergeSort(xs: List[Int]): List[Int] = {
+  val n = xs.length/2
+
+  if (n == 0) {
+    xs
+  } else {
+    val (fst, snd) = xs splitAt n
+
+    merge(mergeSort(fst), mergeSort(snd))
+  }
+}
