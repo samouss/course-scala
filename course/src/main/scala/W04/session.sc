@@ -1,4 +1,4 @@
-import W04._
+import W04.{Number, Expr, Sum}
 
 def show(e: Expr): String = e match {
   case Number(n) => n.toString
