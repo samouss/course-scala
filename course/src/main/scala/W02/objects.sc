@@ -1,9 +1,9 @@
 class Rational(x: Int, y: Int) {
-  def numer = x
-  def denom = y
+  def numer: Int = x
+  def denom: Int = y
 }
 
-object rationals {
+object Rationals {
   val x = new Rational(1, 2)
 
   x.numer
