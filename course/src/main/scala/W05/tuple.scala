@@ -1,17 +1,18 @@
+import math.Ordering
 
-def merge(xs: List[Int], ys: List[Int]): List[Int] = (xs, ys) match {
+def merge[T](xs: List[T], ys: List[T])(implicit ord: Ordering[T]): List[T] = (xs, ys) match {
   case (Nil, x) => x
   case (x, Nil) => x
   case (x :: xs1, y :: ys1) =>
-    if (x < y) {
+    if (ord.lt(x, y)) {
       x :: merge(xs1, ys)
     } else {
       y :: merge(xs, ys1)
     }
 }
 
-def mergeSort(xs: List[Int]): List[Int] = {
-  val n = xs.length/2
+def mergeSort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] = {
+  val n = xs.length / 2
 
   if (n == 0) {
     xs
