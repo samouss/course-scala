@@ -14,3 +14,7 @@ def pack[T](xs: List[T]): List[List[T]] = xs match {
     val (first, rest) = xs.span(x => x == y)
     first :: pack(rest)
 }
+
+def encode[T](xs: List[T]): List[(T, Int)] = {
+  pack(xs).map(ys => (ys.head, ys.length))
+}
