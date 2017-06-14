@@ -7,3 +7,10 @@ def squareListRecursive(xs: List[Int]): List[Int] = xs match {
 def squareListMap(xs: List[Int]): List[Int] = {
   xs.map(x => x * x)
 }
+
+def pack[T](xs: List[T]): List[List[T]] = xs match {
+  case Nil => Nil
+  case y :: _ =>
+    val (first, rest) = xs.span(x => x == y)
+    first :: pack(rest)
+}
