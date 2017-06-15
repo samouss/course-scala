@@ -94,9 +94,8 @@ object Anagrams {
    */
   def combinations(occurrences: Occurrences): List[Occurrences] = {
     occurrences.foldRight(List[Occurrences](Nil)) {
-      case ((char, count), acc) => {
+      case ((char, count), acc) =>
         acc ++ ( for { x <- acc; n <- 1 to count } yield (char, n) :: x )
-      }
     }
   }
 
