@@ -34,8 +34,16 @@ object Books {
   for {
     book <- books
     author <- book.authors
-    if author.startsWith("Block,")
+    if author.startsWith("Bloch,")
   } yield book.title
+
+  // ==
+
+  books.flatMap(book => {
+    book.authors
+      .withFilter(_.startsWith("Bloch,"))
+      .map(_ => book.title)
+  })
 
   for {
     book1 <- books
